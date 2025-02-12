@@ -1,3 +1,86 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: 79 70 229;
+    --primary-light: 99 102 241;
+    --primary-dark: 67 56 202;
+    --surface: 255 255 255;
+    --surface-hover: 243 244 246;
+    --text-primary: 31 41 55;
+    --text-secondary: 75 85 99;
+  }
+
+  /* ダークモードのカラー設定 */
+  :root[class~="dark"] {
+    --primary: 129 140 248;
+    --primary-light: 165 180 252;
+    --primary-dark: 99 102 241;
+    --surface: 31 41 55;
+    --surface-hover: 55 65 81;
+    --text-primary: 243 244 246;
+    --text-secondary: 209 213 219;
+  }
+
+  body {
+    @apply antialiased text-gray-800 bg-gray-50 dark:bg-gray-900 dark:text-gray-100;
+  }
+
+  /* フォーカスリングのスタイル */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+  }
+}
+
+@layer components {
+  .section-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-0.5;
+  }
+}
+
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* 印刷用スタイル */
+@media print {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  /* 改ページ制御 */
+  section {
+    break-inside: avoid;
+  }
+}
